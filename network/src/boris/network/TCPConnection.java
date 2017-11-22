@@ -8,9 +8,15 @@ public class TCPConnection {
 
     private final Socket socket;
     private final Thread rxThread;
-    private final TCPConnectionListener eventListener;
+    private TCPConnectionListener eventListener;
     private final BufferedReader in;
     private final BufferedWriter out;
+
+    public TCPConnection(TCPConnectionListener eventListener, String ipAddr, int port) throws IOException {
+
+        this(eventListener, new Socket(ipAddr, port));
+
+    }
 
     public TCPConnection(TCPConnectionListener eventListener, Socket socket) throws IOException{
 
@@ -29,7 +35,7 @@ public class TCPConnection {
                     eventListener.onException(TCPConnection.this, e);
 
                 } finally {
-
+                    eventListener.onDisconnect(TCPConnection.this);
                 }
             }
         });
@@ -53,5 +59,10 @@ public class TCPConnection {
         } catch (IOException e) {
             eventListener.onException(TCPConnection.this, e);
         }
+    }
+
+    @Override
+    public String toString(){
+        return "TCPConnection: " + socket.getInetAddress() + ": " + socket.getPort();
     }
 }
