@@ -7,32 +7,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
 
 public class ClientWindow extends JFrame implements ActionListener, TCPConnectionListener {
 
-    private static String IP_ADDR;
-    private static int PORT;
-    private static String nickname;
+    private String IP_ADDR;
+    private int PORT;
+    private String nickname;
     private static final int WIDTH = 600;
     private static final int HEIGHT = 400;
 
-/*    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ClientWindow();
-            }
-        });
-    }*/
-
     private final JTextArea log = new JTextArea();
-    //private final JTextField fieldNickname = new JTextField("guest");
     private final JTextField fieldInput = new JTextField();
 
     private TCPConnection connection;
 
-    public ClientWindow(String ip, int portnum, String nickname) {
+    ClientWindow(String ip, int portnum, String nickname) {
         this.IP_ADDR = ip;
         this.PORT = portnum;
         this.nickname = nickname;
@@ -45,14 +37,52 @@ public class ClientWindow extends JFrame implements ActionListener, TCPConnectio
 
         fieldInput.addActionListener(this);
         add(fieldInput, BorderLayout.SOUTH);
-        //add(fieldNickname, BorderLayout.NORTH);
 
         setVisible(true);
         try {
             connection = new TCPConnection(this, IP_ADDR, PORT);
+            connection.sendString(nickname + " is online!");
         } catch (IOException e) {
             printMsg("Connection exception: " + e);
         }
+        addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                return;
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                connection.sendString(nickname + " is offline!");
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                return;
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                return;
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                return;
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                return;
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                return;
+            }
+
+        });
     }
 
     @Override

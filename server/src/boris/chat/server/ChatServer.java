@@ -4,8 +4,9 @@ import boris.network.TCPConnection;
 import boris.network.TCPConnectionListener;
 
 import java.io.IOException;
-import java.net.ServerSocket;
+import java.net.*;
 import java.util.ArrayList;
+import java.net.InetAddress;
 
 public class ChatServer implements TCPConnectionListener{
 
@@ -16,7 +17,7 @@ public class ChatServer implements TCPConnectionListener{
     private final ArrayList<TCPConnection> connections = new ArrayList<>();
 
     private ChatServer() {
-        System.out.println("Server running...");
+        System.out.println("Server running on port 8189...");
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             while (true) {
                 try {
@@ -30,7 +31,6 @@ public class ChatServer implements TCPConnectionListener{
         } catch (IOException e) {
             throw new RuntimeException();
         }
-
     }
 
 

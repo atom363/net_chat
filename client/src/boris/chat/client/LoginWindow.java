@@ -23,7 +23,6 @@ public class LoginWindow extends JFrame implements ActionListener {
     private final JTextField fieldIP = new JTextField("Server IP address");
     private final JTextField fieldPort = new JTextField("Port number");
     private final JTextField fieldNickname = new JTextField("Your nickname");
-    private final JButton buttonLogin = new JButton("Login");
 
     private LoginWindow() {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,6 +32,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         add(fieldIP);
         add(fieldPort);
         add(fieldNickname);
+        JButton buttonLogin = new JButton("Login");
         buttonLogin.addActionListener(this);
         add(buttonLogin);
         setVisible(true);
