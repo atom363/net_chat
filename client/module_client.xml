@@ -2,9 +2,9 @@
 <project name="module_client" default="compile.module.client">
   <dirname property="module.client.basedir" file="${ant.file.module_client}"/>
   
-  <property name="module.jdk.home.client" value="${jdk.home.9.0}"/>
-  <property name="module.jdk.bin.client" value="${jdk.bin.9.0}"/>
-  <property name="module.jdk.classpath.client" value="jdk.classpath.9.0"/>
+  <property name="module.jdk.home.client" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.client" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.client" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.client" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
   
