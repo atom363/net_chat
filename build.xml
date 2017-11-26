@@ -157,112 +157,9 @@
     </fileset>
   </path>
   
-  <property name="jdk.bin.9.0" value="${jdk.home.9.0}/bin"/>
-  <path id="jdk.classpath.9.0">
-    <fileset dir="${jdk.home.9.0}">
-      <include name="../Home!/java.activation"/>
-      <include name="../Home!/java.base"/>
-      <include name="../Home!/java.compiler"/>
-      <include name="../Home!/java.corba"/>
-      <include name="../Home!/java.datatransfer"/>
-      <include name="../Home!/java.desktop"/>
-      <include name="../Home!/java.instrument"/>
-      <include name="../Home!/java.jnlp"/>
-      <include name="../Home!/java.logging"/>
-      <include name="../Home!/java.management"/>
-      <include name="../Home!/java.management.rmi"/>
-      <include name="../Home!/java.naming"/>
-      <include name="../Home!/java.prefs"/>
-      <include name="../Home!/java.rmi"/>
-      <include name="../Home!/java.scripting"/>
-      <include name="../Home!/java.se"/>
-      <include name="../Home!/java.se.ee"/>
-      <include name="../Home!/java.security.jgss"/>
-      <include name="../Home!/java.security.sasl"/>
-      <include name="../Home!/java.smartcardio"/>
-      <include name="../Home!/java.sql"/>
-      <include name="../Home!/java.sql.rowset"/>
-      <include name="../Home!/java.transaction"/>
-      <include name="../Home!/java.xml"/>
-      <include name="../Home!/java.xml.bind"/>
-      <include name="../Home!/java.xml.crypto"/>
-      <include name="../Home!/java.xml.ws"/>
-      <include name="../Home!/java.xml.ws.annotation"/>
-      <include name="../Home!/javafx.base"/>
-      <include name="../Home!/javafx.controls"/>
-      <include name="../Home!/javafx.deploy"/>
-      <include name="../Home!/javafx.fxml"/>
-      <include name="../Home!/javafx.graphics"/>
-      <include name="../Home!/javafx.media"/>
-      <include name="../Home!/javafx.swing"/>
-      <include name="../Home!/javafx.web"/>
-      <include name="../Home!/jdk.accessibility"/>
-      <include name="../Home!/jdk.attach"/>
-      <include name="../Home!/jdk.charsets"/>
-      <include name="../Home!/jdk.compiler"/>
-      <include name="../Home!/jdk.crypto.cryptoki"/>
-      <include name="../Home!/jdk.crypto.ec"/>
-      <include name="../Home!/jdk.deploy"/>
-      <include name="../Home!/jdk.deploy.controlpanel"/>
-      <include name="../Home!/jdk.dynalink"/>
-      <include name="../Home!/jdk.editpad"/>
-      <include name="../Home!/jdk.hotspot.agent"/>
-      <include name="../Home!/jdk.httpserver"/>
-      <include name="../Home!/jdk.incubator.httpclient"/>
-      <include name="../Home!/jdk.internal.ed"/>
-      <include name="../Home!/jdk.internal.jvmstat"/>
-      <include name="../Home!/jdk.internal.le"/>
-      <include name="../Home!/jdk.internal.opt"/>
-      <include name="../Home!/jdk.internal.vm.ci"/>
-      <include name="../Home!/jdk.jartool"/>
-      <include name="../Home!/jdk.javadoc"/>
-      <include name="../Home!/jdk.javaws"/>
-      <include name="../Home!/jdk.jcmd"/>
-      <include name="../Home!/jdk.jconsole"/>
-      <include name="../Home!/jdk.jdeps"/>
-      <include name="../Home!/jdk.jdi"/>
-      <include name="../Home!/jdk.jdwp.agent"/>
-      <include name="../Home!/jdk.jfr"/>
-      <include name="../Home!/jdk.jlink"/>
-      <include name="../Home!/jdk.jshell"/>
-      <include name="../Home!/jdk.jsobject"/>
-      <include name="../Home!/jdk.jstatd"/>
-      <include name="../Home!/jdk.localedata"/>
-      <include name="../Home!/jdk.management"/>
-      <include name="../Home!/jdk.management.agent"/>
-      <include name="../Home!/jdk.management.cmm"/>
-      <include name="../Home!/jdk.management.jfr"/>
-      <include name="../Home!/jdk.management.resource"/>
-      <include name="../Home!/jdk.naming.dns"/>
-      <include name="../Home!/jdk.naming.rmi"/>
-      <include name="../Home!/jdk.net"/>
-      <include name="../Home!/jdk.pack"/>
-      <include name="../Home!/jdk.packager"/>
-      <include name="../Home!/jdk.packager.services"/>
-      <include name="../Home!/jdk.plugin"/>
-      <include name="../Home!/jdk.plugin.dom"/>
-      <include name="../Home!/jdk.plugin.server"/>
-      <include name="../Home!/jdk.policytool"/>
-      <include name="../Home!/jdk.rmic"/>
-      <include name="../Home!/jdk.scripting.nashorn"/>
-      <include name="../Home!/jdk.scripting.nashorn.shell"/>
-      <include name="../Home!/jdk.sctp"/>
-      <include name="../Home!/jdk.security.auth"/>
-      <include name="../Home!/jdk.security.jgss"/>
-      <include name="../Home!/jdk.snmp"/>
-      <include name="../Home!/jdk.unsupported"/>
-      <include name="../Home!/jdk.xml.bind"/>
-      <include name="../Home!/jdk.xml.dom"/>
-      <include name="../Home!/jdk.xml.ws"/>
-      <include name="../Home!/jdk.zipfs"/>
-      <include name="../Home!/oracle.desktop"/>
-      <include name="../Home!/oracle.net"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value=""/>
-  <property name="project.jdk.bin" value=""/>
-  <property name="project.jdk.classpath" value=""/>
+  <property name="project.jdk.home" value="${jdk.home.9.0}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.9.0}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.9.0"/>
   <!-- Register Custom Compiler Taskdefs -->
   <property name="javac2.home" value="${idea.home}/lib"/>
   <path id="javac2.classpath">
@@ -278,11 +175,255 @@
   
   <!-- Modules -->
   
-  <import file="${basedir}/network/module_network.xml"/>
   
-  <import file="${basedir}/client/module_client.xml"/>
+  <!-- Module network -->
   
-  <import file="${basedir}/server/module_server.xml"/>
+  <dirname property="module.network.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.network" value="${jdk.home.9.0}"/>
+  <property name="module.jdk.bin.network" value="${jdk.bin.9.0}"/>
+  <property name="module.jdk.classpath.network" value="jdk.classpath.9.0"/>
+  
+  <property name="compiler.args.network" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
+  
+  <property name="network.output.dir" value="${module.network.basedir}/out/production/network"/>
+  <property name="network.testoutput.dir" value="${module.network.basedir}/out/test/network"/>
+  
+  <path id="network.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="network.module.production.classpath">
+    <path refid="${module.jdk.classpath.network}"/>
+  </path>
+  
+  <path id="network.runtime.production.module.classpath">
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="network.module.classpath">
+    <path refid="${module.jdk.classpath.network}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="network.runtime.module.classpath">
+    <pathelement location="${network.testoutput.dir}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.network">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.network">
+    <patternset refid="excluded.from.module.network"/>
+  </patternset>
+  
+  <path id="network.module.sourcepath">
+    <dirset dir="${module.network.basedir}/network">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.network" depends="compile.module.network.production,compile.module.network.tests" description="Compile module network"/>
+  
+  <target name="compile.module.network.production" depends="register.custom.compilers" description="Compile module network; production classes">
+    <mkdir dir="${network.output.dir}"/>
+    <javac2 destdir="${network.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.network}/javac">
+      <compilerarg line="${compiler.args.network}"/>
+      <bootclasspath refid="network.module.bootclasspath"/>
+      <classpath refid="network.module.production.classpath"/>
+      <src refid="network.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.network"/>
+    </javac2>
+    
+    <copy todir="${network.output.dir}">
+      <fileset dir="${module.network.basedir}/network/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.network.tests" depends="register.custom.compilers,compile.module.network.production" description="compile module network; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.network" description="cleanup module">
+    <delete dir="${network.output.dir}"/>
+    <delete dir="${network.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module client -->
+  
+  <dirname property="module.client.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.client" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.client" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.client" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.client" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
+  
+  <property name="client.output.dir" value="${module.client.basedir}/out/production/client"/>
+  <property name="client.testoutput.dir" value="${module.client.basedir}/out/test/client"/>
+  
+  <path id="client.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="client.module.production.classpath">
+    <path refid="${module.jdk.classpath.client}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="client.runtime.production.module.classpath">
+    <pathelement location="${client.output.dir}"/>
+    <path refid="network.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="client.module.classpath">
+    <path refid="${module.jdk.classpath.client}"/>
+    <pathelement location="${client.output.dir}"/>
+    <pathelement location="${network.testoutput.dir}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="client.runtime.module.classpath">
+    <pathelement location="${client.testoutput.dir}"/>
+    <pathelement location="${client.output.dir}"/>
+    <path refid="network.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.client">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.client">
+    <patternset refid="excluded.from.module.client"/>
+  </patternset>
+  
+  <path id="client.module.sourcepath">
+    <dirset dir="${module.client.basedir}/client">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.client" depends="compile.module.client.production,compile.module.client.tests" description="Compile module client"/>
+  
+  <target name="compile.module.client.production" depends="register.custom.compilers,compile.module.network" description="Compile module client; production classes">
+    <mkdir dir="${client.output.dir}"/>
+    <javac2 destdir="${client.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.client}/javac">
+      <compilerarg line="${compiler.args.client}"/>
+      <bootclasspath refid="client.module.bootclasspath"/>
+      <classpath refid="client.module.production.classpath"/>
+      <src refid="client.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.client"/>
+    </javac2>
+    
+    <copy todir="${client.output.dir}">
+      <fileset dir="${module.client.basedir}/client/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.client.tests" depends="register.custom.compilers,compile.module.client.production" description="compile module client; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.client" description="cleanup module">
+    <delete dir="${client.output.dir}"/>
+    <delete dir="${client.testoutput.dir}"/>
+  </target>
+  
+  
+  <!-- Module server -->
+  
+  <dirname property="module.server.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.server" value="${jdk.home.9.0}"/>
+  <property name="module.jdk.bin.server" value="${jdk.bin.9.0}"/>
+  <property name="module.jdk.classpath.server" value="jdk.classpath.9.0"/>
+  
+  <property name="compiler.args.server" value="-encoding UTF-8 -source 9 -target 9 ${compiler.args}"/>
+  
+  <property name="server.output.dir" value="${module.server.basedir}/out/production/server"/>
+  <property name="server.testoutput.dir" value="${module.server.basedir}/out/test/server"/>
+  
+  <path id="server.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="server.module.production.classpath">
+    <path refid="${module.jdk.classpath.server}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="server.runtime.production.module.classpath">
+    <pathelement location="${server.output.dir}"/>
+    <path refid="network.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="server.module.classpath">
+    <path refid="${module.jdk.classpath.server}"/>
+    <pathelement location="${server.output.dir}"/>
+    <pathelement location="${network.testoutput.dir}"/>
+    <pathelement location="${network.output.dir}"/>
+  </path>
+  
+  <path id="server.runtime.module.classpath">
+    <pathelement location="${server.testoutput.dir}"/>
+    <pathelement location="${server.output.dir}"/>
+    <path refid="network.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.server">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.server">
+    <patternset refid="excluded.from.module.server"/>
+  </patternset>
+  
+  <path id="server.module.sourcepath">
+    <dirset dir="${module.server.basedir}/server">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.server" depends="compile.module.server.production,compile.module.server.tests" description="Compile module server"/>
+  
+  <target name="compile.module.server.production" depends="register.custom.compilers,compile.module.network" description="Compile module server; production classes">
+    <mkdir dir="${server.output.dir}"/>
+    <javac2 destdir="${server.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.server}/javac">
+      <compilerarg line="${compiler.args.server}"/>
+      <bootclasspath refid="server.module.bootclasspath"/>
+      <classpath refid="server.module.production.classpath"/>
+      <src refid="server.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.server"/>
+    </javac2>
+    
+    <copy todir="${server.output.dir}">
+      <fileset dir="${module.server.basedir}/server/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.server.tests" depends="register.custom.compilers,compile.module.server.production" description="compile module server; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.server" description="cleanup module">
+    <delete dir="${server.output.dir}"/>
+    <delete dir="${server.testoutput.dir}"/>
+  </target>
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
