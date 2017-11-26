@@ -11,27 +11,31 @@ import java.io.IOException;
 
 public class ClientWindow extends JFrame implements ActionListener, TCPConnectionListener {
 
-    private static final String IP_ADDR = "127.0.0.1";
-    private static final int PORT = 8189;
+    private static String IP_ADDR;
+    private static int PORT;
+    private static String nickname;
     private static final int WIDTH = 600;
     private static final int HEIGHT = 400;
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new ClientWindow();
             }
         });
-    }
+    }*/
 
     private final JTextArea log = new JTextArea();
-    private final JTextField fieldNickname = new JTextField("guest");
+    //private final JTextField fieldNickname = new JTextField("guest");
     private final JTextField fieldInput = new JTextField();
 
     private TCPConnection connection;
 
-    private ClientWindow() {
+    public ClientWindow(String ip, int portnum, String nickname) {
+        this.IP_ADDR = ip;
+        this.PORT = portnum;
+        this.nickname = nickname;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
@@ -41,7 +45,7 @@ public class ClientWindow extends JFrame implements ActionListener, TCPConnectio
 
         fieldInput.addActionListener(this);
         add(fieldInput, BorderLayout.SOUTH);
-        add(fieldNickname, BorderLayout.NORTH);
+        //add(fieldNickname, BorderLayout.NORTH);
 
         setVisible(true);
         try {
@@ -56,7 +60,7 @@ public class ClientWindow extends JFrame implements ActionListener, TCPConnectio
         String msg = fieldInput.getText();
         if(msg.equals("")) return;
         fieldInput.setText(null);
-        connection.sendString(fieldNickname.getText() + ": " + msg);
+        connection.sendString(nickname + ": " + msg);
     }
 
     @Override
