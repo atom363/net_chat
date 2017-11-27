@@ -1,4 +1,6 @@
 language: java
+os:
+  - osx
 jdk:
   - oraclejdk9
 script: ant
