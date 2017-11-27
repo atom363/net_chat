@@ -1,6 +1,5 @@
 language: java
-os:
-  - osx
 jdk:
   - oraclejdk9
+install: ant depth
 script: ant
