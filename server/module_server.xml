@@ -22,7 +22,7 @@
   
   <path id="server.runtime.production.module.classpath">
     <pathelement location="${server.output.dir}"/>
-    <pathelement location="${network.output.dir}"/>
+    <path refid="network.runtime.production.module.classpath"/>
   </path>
   
   <path id="server.module.classpath">
@@ -35,8 +35,7 @@
   <path id="server.runtime.module.classpath">
     <pathelement location="${server.testoutput.dir}"/>
     <pathelement location="${server.output.dir}"/>
-    <pathelement location="${network.testoutput.dir}"/>
-    <pathelement location="${network.output.dir}"/>
+    <path refid="network.runtime.module.classpath"/>
   </path>
   
   
@@ -57,15 +56,15 @@
   
   <target name="compile.module.server" depends="compile.module.server.production,compile.module.server.tests" description="Compile module server"/>
   
-  <target name="compile.module.server.production" depends="register.custom.compilers,compile.module.network" description="Compile module server; production classes">
+  <target name="compile.module.server.production" depends="compile.module.network" description="Compile module server; production classes">
     <mkdir dir="${server.output.dir}"/>
-    <javac2 destdir="${server.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.server}/javac">
+    <javac destdir="${server.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.server}/javac">
       <compilerarg line="${compiler.args.server}"/>
       <bootclasspath refid="server.module.bootclasspath"/>
       <classpath refid="server.module.production.classpath"/>
       <src refid="server.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.server"/>
-    </javac2>
+    </javac>
     
     <copy todir="${server.output.dir}">
       <fileset dir="${module.server.basedir}/src">
@@ -75,7 +74,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.server.tests" depends="register.custom.compilers,compile.module.server.production" description="compile module server; test classes" unless="skip.tests"/>
+  <target name="compile.module.server.tests" depends="compile.module.server.production" description="compile module server; test classes" unless="skip.tests"/>
   
   <target name="clean.module.server" description="cleanup module">
     <delete dir="${server.output.dir}"/>
