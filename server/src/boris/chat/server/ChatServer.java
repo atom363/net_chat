@@ -6,7 +6,6 @@ import boris.network.TCPConnectionListener;
 import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
-import java.net.InetAddress;
 
 public class ChatServer implements TCPConnectionListener{
 
