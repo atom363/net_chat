@@ -21,7 +21,7 @@
   
   <path id="client.runtime.production.module.classpath">
     <pathelement location="${client.output.dir}"/>
-    <path refid="network.runtime.production.module.classpath"/>
+    <pathelement location="${network.output.dir}"/>
   </path>
   
   <path id="client.module.classpath">
@@ -33,7 +33,8 @@
   <path id="client.runtime.module.classpath">
     <pathelement location="${client.testoutput.dir}"/>
     <pathelement location="${client.output.dir}"/>
-    <path refid="network.runtime.module.classpath"/>
+    <pathelement location="${network.testoutput.dir}"/>
+    <pathelement location="${network.output.dir}"/>
   </path>
   
   
