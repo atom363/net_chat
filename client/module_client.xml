@@ -16,7 +16,6 @@
   </path>
   
   <path id="client.module.production.classpath">
-    <path refid="${module.jdk.classpath.client}"/>
     <pathelement location="${network.output.dir}"/>
   </path>
   
@@ -26,7 +25,6 @@
   </path>
   
   <path id="client.module.classpath">
-    <path refid="${module.jdk.classpath.client}"/>
     <pathelement location="${client.output.dir}"/>
     <pathelement location="${network.testoutput.dir}"/>
     <pathelement location="${network.output.dir}"/>
@@ -56,15 +54,15 @@
   
   <target name="compile.module.client" depends="compile.module.client.production,compile.module.client.tests" description="Compile module client"/>
   
-  <target name="compile.module.client.production" depends="compile.module.network" description="Compile module client; production classes">
+  <target name="compile.module.client.production" depends="register.custom.compilers,compile.module.network" description="Compile module client; production classes">
     <mkdir dir="${client.output.dir}"/>
-    <javac destdir="${client.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.client}/javac">
+    <javac2 destdir="${client.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.client}/javac">
       <compilerarg line="${compiler.args.client}"/>
       <bootclasspath refid="client.module.bootclasspath"/>
       <classpath refid="client.module.production.classpath"/>
       <src refid="client.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.client"/>
-    </javac>
+    </javac2>
     
     <copy todir="${client.output.dir}">
       <fileset dir="${module.client.basedir}/src">
@@ -74,7 +72,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.client.tests" depends="compile.module.client.production" description="compile module client; test classes" unless="skip.tests"/>
+  <target name="compile.module.client.tests" depends="register.custom.compilers,compile.module.client.production" description="compile module client; test classes" unless="skip.tests"/>
   
   <target name="clean.module.client" description="cleanup module">
     <delete dir="${client.output.dir}"/>
