@@ -48,15 +48,15 @@
   
   <target name="compile.module.network" depends="compile.module.network.production,compile.module.network.tests" description="Compile module network"/>
   
-  <target name="compile.module.network.production" depends="register.custom.compilers" description="Compile module network; production classes">
+  <target name="compile.module.network.production" description="Compile module network; production classes">
     <mkdir dir="${network.output.dir}"/>
-    <javac2 destdir="${network.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.network}/javac">
+    <javac destdir="${network.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.network}/javac">
       <compilerarg line="${compiler.args.network}"/>
       <bootclasspath refid="network.module.bootclasspath"/>
       <classpath refid="network.module.production.classpath"/>
       <src refid="network.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.network"/>
-    </javac2>
+    </javac>
     
     <copy todir="${network.output.dir}">
       <fileset dir="${module.network.basedir}/src">
@@ -66,7 +66,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.network.tests" depends="register.custom.compilers,compile.module.network.production" description="compile module network; test classes" unless="skip.tests"/>
+  <target name="compile.module.network.tests" depends="compile.module.network.production" description="compile module network; test classes" unless="skip.tests"/>
   
   <target name="clean.module.network" description="cleanup module">
     <delete dir="${network.output.dir}"/>
